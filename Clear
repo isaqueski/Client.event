@@ -1,0 +1,14 @@
+@client.event
+async def on_message(message):
+    if message.content.startswith('p!clear'):
+       numero = str(message.content[7:])
+       if not message.author.server_permissions.manage_messages:
+          return await client.send_message(message.channel, "Olá "+message.author.mention+", não foi possivel apagar pois você não tem rank no servidor")
+       elif int(numero) > 100:
+            return  await client.send_message(message.channel, " O limite é 100.")
+       msgs = []
+       number = int(numero)+1
+       async for x in client.logs_from(message.channel, limit=number):
+          msgs.append(x)
+       await client.delete_messages(msgs)
+       await client.send_message(message.channel, "Foi deletada  `{}` messagens.".format(numero))
