@@ -1,0 +1,4 @@
+@client.event
+async def on_message(message):
+    if message.content.startswith('+oi'):
+        await client.send_message(message.channel, 'Ola Sr')
